@@ -131,6 +131,9 @@ let s:gb.faded_purple   = ['#8f3f71', 96]      " 143-63-113
 let s:gb.faded_aqua     = ['#427b58', 66]      " 66-123-88
 let s:gb.faded_orange   = ['#af3a03', 130]     " 175-58-3
 
+let s:gb.dark_sea_green_2   = ['#5faf87', 72]     " 175-215-175
+let s:gb.deep_sky_blue_1   = ['#00afff', 39]     " rgb(0,175,255) 
+
 " }}}
 " Setup Emphasis: {{{
 
@@ -455,6 +458,8 @@ call s:HL('GruvboxBlueSign', s:blue, s:sign_column, s:invert_signs)
 call s:HL('GruvboxPurpleSign', s:purple, s:sign_column, s:invert_signs)
 call s:HL('GruvboxAquaSign', s:aqua, s:sign_column, s:invert_signs)
 
+call s:HL('DeepSkyBlue1', s:gb.deep_sky_blue_1)
+
 " }}}
 
 " Vanilla colorscheme ---------------------------------------------------------
@@ -572,12 +577,12 @@ else
   call s:HL('Special', s:orange, s:bg1, s:italicize_strings)
 endif
 
-call s:HL('Comment', s:gray, s:none, s:italicize_comments)
+call s:HL('Comment', s:gb.dark_sea_green_2, s:none, s:italicize_comments)
 call s:HL('Todo', s:vim_fg, s:vim_bg, s:bold . s:italic)
 call s:HL('Error', s:red, s:vim_bg, s:bold . s:inverse)
 
 " Generic statement
-hi! link Statement GruvboxRed
+hi! link Statement DeepSkyBlue1
 " if, then, else, endif, swicth, etc.
 hi! link Conditional GruvboxRed
 " for, do, while, etc.
@@ -587,7 +592,7 @@ hi! link Label GruvboxRed
 " try, catch, throw
 hi! link Exception GruvboxRed
 " sizeof, "+", "*", etc.
-hi! link Operator Normal
+hi! link Operator GruvboxAqua
 " Any other keyword
 hi! link Keyword GruvboxRed
 
@@ -618,7 +623,7 @@ else
   call s:HL('String',  s:fg1, s:bg1, s:italicize_strings)
 endif
 " Boolean constant: TRUE, false
-hi! link Boolean GruvboxPurple
+hi! link Boolean GruvboxRed
 " Number constant: 234, 0xff
 hi! link Number GruvboxPurple
 " Floating point constant: 2.3e10
@@ -1000,6 +1005,32 @@ hi! link clojureUnquote GruvboxYellow
 
 hi! link cOperator GruvboxPurple
 hi! link cStructure GruvboxOrange
+
+" Add more syntax for cpp (inspired by purify).
+function! s:add_more_cpp_syntax()
+    syn keyword cDeclarationOverwrite var const type 
+    syn match cppBraces       "[{}\[\]]"
+    syn match cppParens       "[()]"
+    syn match cppOpSymbols    "=\{1,2}\|!=\|<\|>\|>=\|<=\|++\|+=\|--\|-=\|-"
+    syn match cppOpSymbols    "\(\*\)\|\(|\)\|\(&\)\|\(?\)\|\(+\)"
+    syn match cppOpSymbols   "\v\s/\s" 
+    syn match cppEndColons    "[,:;]"
+    syn match cppLogicSymbols "\(&&\)\|\(||\)\|\(!\)"
+    syn match cppField "\v\w(\w)*_>"
+
+    call s:HL('cppDeclarationOverwrite', s:green)
+    call s:HL('cppBraces',               s:blue)
+    call s:HL('cppParens',               s:aqua)
+    call s:HL('cppOpSymbols',            s:orange)
+    call s:HL('cppEndColons',            s:green)
+    call s:HL('cppLogicSymbols',         s:purple)
+    call s:HL('cppField',         s:purple)
+endfunction
+
+augroup new_cpp_syntax
+    autocmd!
+    autocmd Filetype cpp call s:add_more_cpp_syntax()
+augroup END
 
 " }}}
 " Python: {{{
