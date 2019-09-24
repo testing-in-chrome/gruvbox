@@ -1006,30 +1006,36 @@ hi! link clojureUnquote GruvboxYellow
 hi! link cOperator GruvboxPurple
 hi! link cStructure GruvboxOrange
 
-" Add more syntax for cpp (inspired by purify).
+" Add more syntax for cpp and D (inspired by purify).
+function! s:add_common_syntax()
+  syn keyword cDeclarationOverwrite var const type 
+  syn match cppBraces       "[{}\[\]]"
+  syn match cppParens       "[()]"
+  syn match cppOpSymbols    "=\{1,2}\|!=\|<\|>\|>=\|<=\|++\|+=\|--\|-=\|-"
+  syn match cppOpSymbols    "\(\*\)\|\(|\)\|\(&\)\|\(?\)\|\(+\)"
+  syn match cppOpSymbols   "\v\s/\s" 
+  syn match cppEndColons    "[,:;]"
+  syn match cppLogicSymbols "\(&&\)\|\(||\)\|\(!\)"
+
+  call s:HL('cDeclarationOverwrite', s:red)
+  call s:HL('cppBraces',               s:blue)
+  call s:HL('cppParens',               s:aqua)
+  call s:HL('cppOpSymbols',            s:orange)
+  call s:HL('cppEndColons',            s:green)
+  call s:HL('cppLogicSymbols',         s:purple)
+endfunction
+
 function! s:add_more_cpp_syntax()
-    syn keyword cDeclarationOverwrite var const type 
-    syn match cppBraces       "[{}\[\]]"
-    syn match cppParens       "[()]"
-    syn match cppOpSymbols    "=\{1,2}\|!=\|<\|>\|>=\|<=\|++\|+=\|--\|-=\|-"
-    syn match cppOpSymbols    "\(\*\)\|\(|\)\|\(&\)\|\(?\)\|\(+\)"
-    syn match cppOpSymbols   "\v\s/\s" 
-    syn match cppEndColons    "[,:;]"
-    syn match cppLogicSymbols "\(&&\)\|\(||\)\|\(!\)"
     syn match cppField "\v\w(\w)*_>"
 
-    call s:HL('cppDeclarationOverwrite', s:green)
-    call s:HL('cppBraces',               s:blue)
-    call s:HL('cppParens',               s:aqua)
-    call s:HL('cppOpSymbols',            s:orange)
-    call s:HL('cppEndColons',            s:green)
-    call s:HL('cppLogicSymbols',         s:purple)
     call s:HL('cppField',         s:purple)
 endfunction
 
-augroup new_cpp_syntax
+augroup new_cpp_d_syntax
     autocmd!
+    autocmd Filetype cpp call s:add_common_syntax()
     autocmd Filetype cpp call s:add_more_cpp_syntax()
+    autocmd Filetype d call s:add_common_syntax()
 augroup END
 
 " }}}
