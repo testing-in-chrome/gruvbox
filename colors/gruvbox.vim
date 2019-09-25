@@ -133,6 +133,9 @@ let s:gb.faded_orange   = ['#af3a03', 130]     " 175-58-3
 
 let s:gb.dark_sea_green_2   = ['#5faf87', 72]     " 175-215-175
 let s:gb.deep_sky_blue_1   = ['#00afff', 39]     " rgb(0,175,255) 
+let s:gb.steel_blue_1 = ['#5fafff', 75]  " rgb(95,175,255)
+let s:gb.light_golden_rod_1 = ['#ffff5f', 227]  " rgb(255,255,95)
+let s:gb.my_aqua = ['#00ffff', 14]  " rgb(255,255,95)
 
 " }}}
 " Setup Emphasis: {{{
@@ -1027,8 +1030,14 @@ endfunction
 
 function! s:add_more_cpp_syntax()
     syn match cppField "\v\w(\w)*_>"
+    syn match cppFunctionCall "\v<\u\w*\ze\("
+    syn match cppConstant "\v<k\u\w*>"
+    syn match cppAccessor "\v((-\>)|(\.))\zs(\l*(_)*)*\l\ze\("
 
     call s:HL('cppField',         s:purple)
+    call s:HL('cppFunctionCall', s:gb.steel_blue_1, s:vim_bg, s:bold)
+    call s:HL('cppConstant',         s:gb.light_golden_rod_1)
+    call s:HL('cppAccessor',         s:gb.my_aqua)
 endfunction
 
 augroup new_cpp_d_syntax
