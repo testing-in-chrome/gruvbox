@@ -1032,7 +1032,7 @@ function! s:add_more_cpp_syntax()
     syn match cppField "\v\w(\w)*_>"
     syn match cppFunctionCall "\v<\u\w*\ze\("
     syn match cppConstant "\v<k\u\w*>"
-    syn match cppAccessor "\v((-\>)|(\.))\zs(\l*(_)*)*\l\ze\("
+    syn match cppAccessor "\zs\(\(\l*_*\)*\l\)\ze("
 
     call s:HL('cppField',         s:purple)
     call s:HL('cppFunctionCall', s:gb.steel_blue_1, s:vim_bg, s:bold)
