@@ -1029,15 +1029,29 @@ function! s:add_common_syntax()
 endfunction
 
 function! s:add_more_cpp_syntax()
+    syn match skiaFuncCall "\v<\l\w*\ze\("
     syn match cppField "\v\w(\w)*_>"
     syn match cppFunctionCall "\v<\u\w*\ze\("
-    syn match cppConstant "\v<k\u\w*>"
+    syn match cppConstant "\v<k(\u|\d)\w*>"
     syn match cppAccessor "\zs\(\(\l*_*\)*\l\)\ze("
+    syn match enumConsts "\u\(\u\|_\|\d\)\+\>"
 
+    call s:HL('skiaFuncCall',         s:gb.my_aqua)
     call s:HL('cppField',         s:purple)
     call s:HL('cppFunctionCall', s:gb.steel_blue_1, s:vim_bg, s:bold)
     call s:HL('cppConstant',         s:gb.light_golden_rod_1)
     call s:HL('cppAccessor',         s:gb.my_aqua)
+    call s:HL('enumConsts',         s:gb.light_golden_rod_1)
+endfunction
+
+function! s:add_more_d_syntax()
+  syn match dFuncCall "\v<\l\w*\ze\("
+  syn match dClass "\v<\u\w*>"
+  syn match enumConsts "\u\(\u\|_\|\d\)\+\>"
+
+  call s:HL('dFuncCall', s:gb.steel_blue_1, s:vim_bg, s:bold)
+  call s:HL('dClass', s:aqua, s:vim_bg, s:bold)
+  call s:HL('enumConsts',         s:gb.light_golden_rod_1)
 endfunction
 
 augroup new_cpp_d_syntax
@@ -1045,6 +1059,7 @@ augroup new_cpp_d_syntax
     autocmd Filetype cpp call s:add_common_syntax()
     autocmd Filetype cpp call s:add_more_cpp_syntax()
     autocmd Filetype d call s:add_common_syntax()
+    autocmd Filetype d call s:add_more_d_syntax()
 augroup END
 
 " }}}
