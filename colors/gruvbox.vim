@@ -1045,10 +1045,12 @@ function! s:add_more_cpp_syntax()
 endfunction
 
 function! s:add_more_d_syntax()
+  syn match dField "\v<m\u\w*>"
   syn match dFuncCall "\v<\l\w*\ze\("
   syn match dClass "\v<\u\w*>"
   syn match enumConsts "\u\(\u\|_\|\d\)\+\>"
 
+  call s:HL('dField',         s:purple)
   call s:HL('dFuncCall', s:gb.steel_blue_1, s:vim_bg, s:bold)
   call s:HL('dClass', s:aqua, s:vim_bg, s:bold)
   call s:HL('enumConsts',         s:gb.light_golden_rod_1)
