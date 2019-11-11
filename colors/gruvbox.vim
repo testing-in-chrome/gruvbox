@@ -132,7 +132,7 @@ let s:gb.faded_aqua     = ['#427b58', 66]      " 66-123-88
 let s:gb.faded_orange   = ['#af3a03', 130]     " 175-58-3
 
 let s:gb.dark_sea_green_2   = ['#5faf87', 72]     " 175-215-175
-let s:gb.deep_sky_blue_1   = ['#00afff', 39]     " rgb(0,175,255) 
+let s:gb.deep_sky_blue_1   = ['#00afff', 39]     " rgb(0,175,255)
 let s:gb.steel_blue_1 = ['#5fafff', 75]  " rgb(95,175,255)
 let s:gb.light_golden_rod_1 = ['#ffff5f', 227]  " rgb(255,255,95)
 let s:gb.my_aqua = ['#00ffff', 14]  " rgb(255,255,95)
@@ -1011,12 +1011,12 @@ hi! link cStructure GruvboxOrange
 
 " Add more syntax for cpp and D (inspired by purify).
 function! s:add_common_syntax()
-  syn keyword cDeclarationOverwrite var const type 
+  syn keyword cDeclarationOverwrite var const type
   syn match cppBraces       "[{}\[\]]"
   syn match cppParens       "[()]"
   syn match cppOpSymbols    "=\{1,2}\|!=\|<\|>\|>=\|<=\|++\|+=\|--\|-=\|-"
   syn match cppOpSymbols    "\(\*\)\|\(|\)\|\(&\)\|\(?\)\|\(+\)"
-  syn match cppOpSymbols   "\v\s/\s" 
+  syn match cppOpSymbols   "\v\s/\s"
   syn match cppEndColons    "[,:;]"
   syn match cppLogicSymbols "\(&&\)\|\(||\)\|\(!\)"
 
@@ -1038,7 +1038,7 @@ function! s:add_more_cpp_syntax()
 
     call s:HL('skiaFuncCall',         s:gb.my_aqua)
     call s:HL('cppField',         s:purple)
-    call s:HL('cppFunctionCall', s:gb.steel_blue_1, s:vim_bg, s:bold)
+    call s:HL('cppFunctionCall', s:gb.steel_blue_1, s:none, s:bold)
     call s:HL('cppConstant',         s:gb.light_golden_rod_1)
     call s:HL('cppAccessor',         s:gb.my_aqua)
     call s:HL('enumConsts',         s:gb.light_golden_rod_1)
@@ -1051,8 +1051,8 @@ function! s:add_more_d_syntax()
   syn match enumConsts "\u\(\u\|_\|\d\)\+\>"
 
   call s:HL('dField',         s:purple)
-  call s:HL('dFuncCall', s:gb.steel_blue_1, s:vim_bg, s:bold)
-  call s:HL('dClass', s:aqua, s:vim_bg, s:bold)
+  call s:HL('dFuncCall', s:gb.steel_blue_1, s:none, s:bold)
+  call s:HL('dClass', s:aqua, s:none, s:bold)
   call s:HL('enumConsts',         s:gb.light_golden_rod_1)
 endfunction
 
