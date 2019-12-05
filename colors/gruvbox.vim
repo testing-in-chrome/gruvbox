@@ -136,6 +136,7 @@ let s:gb.deep_sky_blue_1   = ['#00afff', 39]     " rgb(0,175,255)
 let s:gb.steel_blue_1 = ['#5fafff', 75]  " rgb(95,175,255)
 let s:gb.light_golden_rod_1 = ['#ffff5f', 227]  " rgb(255,255,95)
 let s:gb.my_aqua = ['#00ffff', 14]  " rgb(255,255,95)
+let s:gb.my_black = ['#000000', 0]  " rgb(0,0,0)
 
 " }}}
 " Setup Emphasis: {{{
@@ -482,7 +483,7 @@ endif
 
 if version >= 700
   " Screen line that the cursor is
-  call s:HL('CursorLine',   s:none, s:bg1)
+  call s:HL('CursorLine',   s:none, s:gb.my_black)
   " Screen column that the cursor is
   hi! link CursorColumn CursorLine
 
@@ -505,7 +506,7 @@ if version >= 703
   call s:HL('Conceal', s:blue, s:none)
 
   " Line number of CursorLine
-  call s:HL('CursorLineNr', s:yellow, s:bg1)
+  call s:HL('CursorLineNr', s:yellow, s:gb.my_black)
 endif
 
 hi! link NonText GruvboxBg2
