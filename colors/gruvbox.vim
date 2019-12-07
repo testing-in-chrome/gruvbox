@@ -1059,8 +1059,8 @@ endfunction
 
 augroup new_cpp_d_syntax
     autocmd!
-    autocmd Filetype cpp call s:add_common_syntax()
-    autocmd Filetype cpp call s:add_more_cpp_syntax()
+    autocmd Filetype c,cpp call s:add_common_syntax()
+    autocmd Filetype c,cpp call s:add_more_cpp_syntax()
     autocmd Filetype d call s:add_common_syntax()
     autocmd Filetype d call s:add_more_d_syntax()
 augroup END
